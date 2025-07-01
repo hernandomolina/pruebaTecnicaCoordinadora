@@ -1,5 +1,9 @@
 # Proyecto de Automatización Guía RCE
 
+## Descripción general
+
+Este proyecto automatiza la validación de la API de creación de guías de Coordinadora utilizando Playwright y SerenityJS bajo el patrón Screenplay. Incluye pruebas automatizadas que cubren casos positivos, negativos y de seguridad, así como integración continua (CI) y generación de reportes profesionales con Allure. El objetivo es asegurar la calidad, robustez y seguridad del servicio de guías.
+
 ## Requisitos
 
 - Node.js >= 18
@@ -23,6 +27,13 @@ npx playwright test
 npx playwright show-report
 ```
 
+## Cómo ver el reporte Allure online
+
+Cada vez que se ejecutan las pruebas en GitHub Actions, se genera y publica automáticamente un reporte Allure en GitHub Pages. Puedes acceder al reporte más reciente en:
+
+```
+https://https://hernandomolina.github.io/pruebaTecnicaCoordinadora/
+```
 ## CI/CD con GitHub Actions
 
 Este proyecto incluye configuración de CI/CD automático:
