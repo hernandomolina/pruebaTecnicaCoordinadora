@@ -9,7 +9,8 @@ on:
 jobs:
   allure-report:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    # Se ejecuta siempre, sin importar si las pruebas pasan o fallan
+    if: always()
     
     steps:
     - name: Checkout

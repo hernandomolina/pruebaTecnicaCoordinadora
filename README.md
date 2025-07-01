@@ -51,3 +51,19 @@ Este proyecto incluye configuración de CI/CD automático:
 - `/screenplay`: lógica de actores, tareas, y datos
 - `/tests`: contiene los specs de pruebas automatizadas
 - `.github/workflows/`: configuración de CI/CD
+
+## 🐛 Bugs Identificados
+
+Durante las pruebas se han identificado **3 bugs críticos** en la API:
+
+### **Bugs de Validación:**
+- **TC04**: La API no valida el límite mínimo de `valorRecaudar`
+- **TC05**: La API no valida el límite máximo de `valorRecaudar`
+
+### **Bug de Seguridad:**
+- **TC09**: La API no valida caracteres peligrosos (vulnerabilidad XSS)
+
+### **Documentación:**
+Ver `BUGS_REPORT.md` para detalles completos de cada bug.
+
+> **Nota**: Las pruebas están configuradas para fallar intencionalmente hasta que se corrijan estos bugs.

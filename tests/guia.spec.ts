@@ -59,7 +59,7 @@ test('TC03 - Crear una guía con valorRecaudar igual a 16000000.', async ({ page
   }
 });
 
-test('TC04 - Crear una guía con valorRecaudar menos al minimo.', async ({ page }) => {
+test('TC04 - BUG: Crear una guía con valorRecaudar igual a 0 (debería ser rechazado).', async ({ page }) => {
  
   const datos = { ...datosValidos, valorRecaudar: "0" };
 
@@ -71,12 +71,14 @@ test('TC04 - Crear una guía con valorRecaudar menos al minimo.', async ({ page 
   console.log('Status:', response.status());
   console.log('Response Body:', responseText);
 
-  expect(response.status(), `Detalle del error: ${responseText}`).toBe(400);
+  // BUG: La API debería rechazar valorRecaudar = 0, pero lo acepta
+  // TODO: Reportar bug - falta validación de límite mínimo
+  expect(response.status(), `BUG: La API acepta valorRecaudar = 0 cuando debería rechazarlo`).toBe(400);
   expect(responseText).toContain('El campo valorRecaudar no puede ser 0');
 
 });
 
-test('TC05 - Crear una guía con valorRecaudar mayor al maximo.', async ({ page }) => {
+test('TC05 - BUG: Crear una guía con valorRecaudar mayor al máximo (debería ser rechazado).', async ({ page }) => {
  
   const datos = { ...datosValidos, valorRecaudar: "16000001" };
 
@@ -88,7 +90,9 @@ test('TC05 - Crear una guía con valorRecaudar mayor al maximo.', async ({ page 
   console.log('Status:', response.status());
   console.log('Response Body:', responseText);
 
-  expect(response.status(), `Detalle del error: ${responseText}`).toBe(400);
+  // BUG: La API debería rechazar valorRecaudar > 16000000, pero lo acepta
+  // TODO: Reportar bug - falta validación de límite máximo
+  expect(response.status(), `BUG: La API acepta valorRecaudar > 16000000 cuando debería rechazarlo`).toBe(400);
   expect(responseText).toContain('El campo valorRecaudar no puede ser mayor a 15999999');
 
 });
@@ -147,7 +151,7 @@ test('TC08 - Crear una guía con caracteres especiales seguros en referenciaReca
   }
 });
 
-test('TC09 - Crear una guía con caracteres peligrosos como scripts', async ({ page }) => {
+test('TC09 - BUG: Crear una guía con caracteres peligrosos (debería ser rechazado).', async ({ page }) => {
   const datos = { ...datosValidos, referenciaRecaudo: "<script>alert('XSS');</script>" };
 
   const response = await page.request.post('https://apiv2-test.coordinadora.com/guias/cm-guias-ms/guia', {
@@ -158,7 +162,9 @@ test('TC09 - Crear una guía con caracteres peligrosos como scripts', async ({ p
   console.log('Status:', response.status());
   console.log('Response Body:', responseText);
 
-  expect(response.status(), `Detalle del error: ${responseText}`).toBe(400);
+  // BUG: La API debería rechazar caracteres peligrosos, pero los acepta
+  // TODO: Reportar bug - falta validación de seguridad XSS
+  expect(response.status(), `BUG: La API acepta caracteres peligrosos cuando debería rechazarlos`).toBe(400);
   expect(responseText).toContain('El campo referenciaRecaudo no puede contener caracteres maliciosos');
 
 }); 
