@@ -1,0 +1,20 @@
+{
+  "name": "guia-rce-automation",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "npx playwright test",
+    "test:headed": "npx playwright test --headed",
+    "report": "npx playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.43.1",
+    "@serenity-js/core": "^3.12.0",
+    "@serenity-js/rest": "^3.12.0",
+    "@types/node": "^24.0.6",
+    "allure-playwright": "^3.3.0",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "playwright": "^1.53.1"
+  }
+}
