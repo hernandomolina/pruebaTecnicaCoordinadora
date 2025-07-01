@@ -1,2 +1,0 @@
-Status: 400
-Response Body: {"isError":true,"message":"Los valores de entrada no son correctos.","code":"BAD_MESSAGE","statusCode":400,"cause":"El campo valorRecaudar es requerido"}
