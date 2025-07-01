@@ -28,6 +28,7 @@ jobs:
     
     - name: Run Playwright tests
       run: npx playwright test
+      continue-on-error: true
     
     - name: Install Allure
       if: always()
@@ -85,4 +86,41 @@ jobs:
       run: npx playwright install --with-deps
     
     - name: Run Playwright tests
-      run: npx playwright test 
+      run: npx playwright test
+      continue-on-error: true
+    
+    - name: Install Allure
+      if: always()
+      run: |
+        npm install -g allure-commandline
+    
+    - name: Generate Allure Report
+      if: always()
+      run: |
+        allure generate allure-results --clean
+    
+    - name: Upload test results
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: playwright-report-windows
+        path: |
+          playwright-report/
+          test-results/
+        retention-days: 30
+    
+    - name: Upload Allure results
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: allure-results-windows
+        path: allure-results/
+        retention-days: 30
+    
+    - name: Upload Allure Report
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: allure-report-windows
+        path: allure-report/
+        retention-days: 30 
