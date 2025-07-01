@@ -1,2 +1,0 @@
-Status: 200
-Response Body: {"isError":false,"data":{"codigo_remision":"99021592177"}}
